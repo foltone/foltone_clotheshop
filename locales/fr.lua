@@ -36,6 +36,7 @@ Locales["fr"] = {
     ["put_on"] = "Mettre",
     ["delete"] = "Supprimer",
     ["rename"] = "Renommer",
+    ["name_clothes"] = "Nommé la tenue",
     ["new_clothes_saved"] = "Nouvelle tenue ~g~%s~s~ sauvegardée",
     ["not_enough_money"] = "Vous n'avez pas assez d'argent",
     ["clothes_deleted"] = "Tenue ~r~supprimée",

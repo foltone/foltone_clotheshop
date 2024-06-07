@@ -139,7 +139,6 @@ local function setClothe(clothe)
 end
 
 local function closeMenu()
-    setTimout(500)
     FoltoneClothesShop.OptionsIndex = 1
     RageUI.GoBack()
     RageUI.CloseAll()
@@ -162,14 +161,6 @@ function RageUI.PoolMenus:FoltoneClothesShop()
         openClothesShop = false
         closeMenu()
     end
-    function menuCreateClothes.Closed()
-        openClothesShop = false
-        closeMenu()
-    end
-    function saveClothes.Closed()
-        openClothesShop = false
-        closeMenu()
-    end
     function menuHelmet.Closed()
         openHelmet = false
         closeMenu()
@@ -188,12 +179,12 @@ function RageUI.PoolMenus:FoltoneClothesShop()
     end
 
     menuClothesShop:IsVisible(function(Items)
-        Items:AddButton(_U("create_clothes_subtitle"), nil, { RightLabel = ">", IsDisabled = false }, function(onSelected)
+        Items:AddButton(_U("create_clothes_subtitle"), nil, { RightLabel = ">", IsDisabled = FoltoneClothesShop.Timout }, function(onSelected)
             if (onSelected) then
                 RageUI.NextMenu = menuCreateClothes
             end
         end)
-        Items:AddButton(_U("save_clothes_subtitle"), nil, { RightLabel = ">", IsDisabled = false }, function(onSelected)
+        Items:AddButton(_U("save_clothes_subtitle"), nil, { RightLabel = ">", IsDisabled = FoltoneClothesShop.Timout }, function(onSelected)
             if (onSelected) then
                 RageUI.NextMenu = saveClothes
             end
@@ -435,7 +426,8 @@ function RageUI.PoolMenus:FoltoneClothesShop()
                     ESX.TriggerServerCallback("foltone_clotheshop:pay", function(paid, notification)
                         if paid then
                             setClothe(getPlayerClothe())
-                            Wait(250)
+                            setTimout(50)
+                            Wait(50)
                             openClothesShop = false
                             closeMenu()
                         end
@@ -469,7 +461,8 @@ function RageUI.PoolMenus:FoltoneClothesShop()
                         ESX.TriggerServerCallback("foltone_clotheshop:delete", function(notification)
                             Config.Notification(notification)
                             RageUI.GoBack()
-                            Wait(10)
+                            setTimout(50)
+                            Wait(50)
                             FoltoneClothesShop.PlayerClothes[i] = nil
                         end, FoltoneClothesShop.PlayerClothes[i].id)
                     end
@@ -692,8 +685,7 @@ CreateThread(function()
                 Config.Marker(v, 2.0)
                 if distance <= 2.0 and not openClothesShop then
                     Config.DisplayText(_U("open_menu"))
-                    if IsControlJustPressed(0, 38) and not FoltoneClothesShop.Timout then
-                        setTimout(500)
+                    if IsControlJustPressed(0, 38) then
                         ESX.TriggerServerCallback("foltone_clotheshop:getClothes", function(clothes)
                             FoltoneClothesShop.PlayerClothes = clothes
                             openClothesShop = true
@@ -710,15 +702,14 @@ CreateThread(function()
             local distance = #(playerCoords - v)
             if distance <= 10.0 then
                 wait = 0
-                Config.Marker(v, 1.0)
-                if distance <= 1.0 and not openHelmet then
+                Config.Marker(v, 0.8)
+                if distance <= 0.8 and not openHelmet then
                     Config.DisplayText(_U("open_menu"))
-                    if IsControlJustPressed(0, 38) and not FoltoneClothesShop.Timout then
-                        setTimout(500)
+                    if IsControlJustPressed(0, 38) then
                         openHelmet = true
                         RageUI.Visible(menuHelmet, not RageUI.Visible(menuHelmet))
                     end
-                elseif distance > 1.0 and openHelmet then
+                elseif distance > 0.8 and openHelmet then
                     openHelmet = false
                     closeMenu()
                 end
@@ -728,15 +719,14 @@ CreateThread(function()
             local distance = #(playerCoords - v)
             if distance <= 10.0 then
                 wait = 0
-                Config.Marker(v, 1.0)
-                if distance <= 1.0 and not openGlasses then
+                Config.Marker(v, 0.8)
+                if distance <= 0.8 and not openGlasses then
                     Config.DisplayText(_U("open_menu"))
-                    if IsControlJustPressed(0, 38) and not FoltoneClothesShop.Timout then
-                        setTimout(500)
+                    if IsControlJustPressed(0, 38) then
                         openGlasses = true
                         RageUI.Visible(menuGlasses, not RageUI.Visible(menuGlasses))
                     end
-                elseif distance > 1.0 and openGlasses then
+                elseif distance > 0.8 and openGlasses then
                     openGlasses = false
                     closeMenu()
                 end
@@ -746,15 +736,14 @@ CreateThread(function()
             local distance = #(playerCoords - v)
             if distance <= 10.0 then
                 wait = 0
-                Config.Marker(v, 1.0)
-                if distance <= 1.0 and not openEars then
+                Config.Marker(v, 0.8)
+                if distance <= 0.8 and not openEars then
                     Config.DisplayText(_U("open_menu"))
-                    if IsControlJustPressed(0, 38) and not FoltoneClothesShop.Timout then
-                        setTimout(500)
+                    if IsControlJustPressed(0, 38) then
                         openEars = true
                         RageUI.Visible(menuEars, not RageUI.Visible(menuEars))
                     end
-                elseif distance > 1.0 and openEars then
+                elseif distance > 0.8 and openEars then
                     openEars = false
                     closeMenu()
                 end
@@ -764,15 +753,14 @@ CreateThread(function()
             local distance = #(playerCoords - v)
             if distance <= 10.0 then
                 wait = 0
-                Config.Marker(v, 1.0)
-                if distance <= 1.0 and not openMask then
+                Config.Marker(v, 0.8)
+                if distance <= 0.8 and not openMask then
                     Config.DisplayText(_U("open_menu"))
-                    if IsControlJustPressed(0, 38) and not FoltoneClothesShop.Timout then
-                        setTimout(500)
+                    if IsControlJustPressed(0, 38) then
                         openMask = true
                         RageUI.Visible(menuMask, not RageUI.Visible(menuMask))
                     end
-                elseif distance > 1.0 and openMask then
+                elseif distance > 0.8 and openMask then
                     openMask = false
                     closeMenu()
                 end

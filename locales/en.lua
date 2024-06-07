@@ -36,6 +36,7 @@ Locales["en"] = {
     ["put_on"] = "Put on",
     ["delete"] = "Delete",
     ["rename"] = "Rename",
+    ["name_clothes"] = "Name the outfit",
     ["new_clothes_saved"] = "New outfit ~g~%s~s~ saved",
     ["not_enough_money"] = "You don't have enough money",
     ["clothes_deleted"] = "Outfit ~r~deleted",
