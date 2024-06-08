@@ -23,7 +23,7 @@ This script allows players to customize their character's outfits. This script i
 - [oxmysql](https://github.com/overextended/oxmysql)
 
 ### Vidéo
-https://youtu.be/
+https://youtu.be/WOrX31JgJbE
 
 ### Discord
 https://discord.gg/X9ReemrhKh
